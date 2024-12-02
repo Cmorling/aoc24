@@ -5,6 +5,9 @@ pub mod days {
 
     pub use self::d1::D1p1;
     pub use self::d1::D1p2;
+    pub use self::d2::D2p1;
+    pub use self::d2::D2p2;
 }
-pub use days::*;
+
 pub use day::Day;
+pub use days::*;
