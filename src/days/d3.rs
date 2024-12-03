@@ -69,18 +69,15 @@ impl Day for D3p2 {
             .captures_iter(&self.inp)
             .map(|caps| {
                 if caps.name("mul").is_some() && is_doing {
-                    caps.name("n").unwrap().as_str().parse::<i32>().unwrap() * 
-                    caps.name("m").unwrap().as_str().parse::<i32>().unwrap()
+                    return caps.name("n").unwrap().as_str().parse::<i32>().unwrap() * 
+                    caps.name("m").unwrap().as_str().parse::<i32>().unwrap();
 
                 } else if caps.name("do").is_some() {
                     is_doing = true;
-                    0 
                 } else if caps.name("dont").is_some() {
                     is_doing = false;
-                    0
-                } else {
-                    0
-                }
+                }             
+                0
             })
             .sum();
         Ok(())
