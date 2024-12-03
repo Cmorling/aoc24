@@ -7,3 +7,4 @@ edition = "2021"
 automod = "1.0"
 itertools = "0.13.0"
 regex = "1.11.1"
+aoc_macros = { path = "./aoc_macros" }
