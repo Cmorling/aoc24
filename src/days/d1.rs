@@ -38,7 +38,7 @@ impl Day for D1p1 {
         Ok(())
     }
 
-    fn get_solution(self) -> String {
+    fn get_solution(&self) -> String {
         self.result.to_string()
     }
 } 
@@ -75,7 +75,7 @@ impl Day for D1p2 {
         Ok(())
     }
 
-    fn get_solution(self) -> String {
+    fn get_solution(&self) -> String {
         self.result.to_string()
     }
 }
