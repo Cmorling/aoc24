@@ -1,26 +1,4 @@
-// pub fn two_d_window<T: Clone>(matrix: &[Vec<T>], size: (usize, usize)) -> Vec<Vec<Vec<T>>> {
-//     let (window_rows, window_cols) = size;
-//     let m_x = matrix.len();
-//     let m_y = matrix[0].len();
-//
-//     let mut windows = Vec::new();
-//
-//     (0..=(m_x - window_rows))
-//         .for_each(|i| {
-//             (0..=(m_y - window_cols))
-//                 .for_each(|j| {
-//                    let mut window = Vec::new(); 
-//                    (0..window_rows)
-//                        .for_each(|k| {
-//                             window.push(matrix[i + k][j..(j + window_cols)].to_vec());
-//                        });
-//                    windows.push(window);
-//                 })
-//         });
-//     windows
-// }
-
-use std::usize;
+use std::{ops::ControlFlow, usize};
 
 pub struct TwoDWindowIterator<'a, T> {
     matrix: &'a [Vec<T>],
@@ -122,4 +100,24 @@ pub fn matrix_count_row_match<T: Clone + std::cmp::PartialEq>(matrix: &[Vec<T>],
             group.starts_with(&pattern)
         })
         .count()
+}
+
+pub fn has_common_element<T: PartialEq>(vec_a: &[T], vec_b: &[T]) -> bool {
+    vec_a.iter().any(|item| vec_b.contains(item))
+}
+
+pub fn find_first_common_index<T: PartialEq>(vec_a: &[T], vec_b: &[T]) -> Option<(usize, usize)> {
+    match vec_a
+        .iter() 
+        .enumerate()
+        .try_for_each(|(i, a)| {
+            match vec_b.iter().position(|b| b == a) {
+                Some(j) => ControlFlow::Break((i, j)),
+                None => ControlFlow::Continue(()) 
+            }
+        })
+    {
+        ControlFlow::Break((i, j)) => Some((i, j)),
+        ControlFlow::Continue(()) => None
+    }
 }
