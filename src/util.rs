@@ -1,4 +1,4 @@
-use std::{ops::ControlFlow, usize};
+use std::ops::ControlFlow;
 
 pub struct TwoDWindowIterator<'a, T> {
     matrix: &'a [Vec<T>],
@@ -44,7 +44,7 @@ impl<'a, T: Clone + Copy> Iterator for TwoDWindowIterator<'a, T> {
         let (window_rows, window_cols) = self.window_size;
         let rows = self.matrix.len();
 
-        if rows == 0 || self.matrix[0].len() == 0 {
+        if rows == 0 || self.matrix[0].is_empty() {
             return None; 
         }
 
@@ -97,7 +97,7 @@ pub fn matrix_count_row_match<T: Clone + std::cmp::PartialEq>(matrix: &[Vec<T>],
     matrix
         .iter()
         .filter(|group| {
-            group.starts_with(&pattern)
+            group.starts_with(pattern)
         })
         .count()
 }

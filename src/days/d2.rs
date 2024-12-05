@@ -8,7 +8,7 @@ fn _valid_check(v: Vec<i32>) -> bool {
     v
     .iter()
     .tuple_windows()
-    .all(|(&n, &m)| !(n.abs_diff(m) > 3)) && 
+    .all(|(&n, &m)| n.abs_diff(m) <= 3) && 
     (
         v
         .iter()

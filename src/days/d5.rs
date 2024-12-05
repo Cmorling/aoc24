@@ -64,7 +64,7 @@ impl Day for D5p1 {
                         }
                     }) 
                 {
-                    ControlFlow::Continue(()) => v.get((v.len() - 1)/2).unwrap().clone(),
+                    ControlFlow::Continue(()) => *v.get((v.len() - 1)/2).unwrap(),
                     ControlFlow::Break(()) => 0,
                 }
             })
@@ -96,7 +96,7 @@ impl D5p2 {
                             Some((i, _)) => {
                                 let mut new = vec_a.to_vec();
                                 new.remove(ind);
-                                new.insert(i, val.clone());
+                                new.insert(i, *val);
 
                                 match self.correct_vector(&new) {
                                     Some(n) => ControlFlow::Break(n),
@@ -152,7 +152,7 @@ impl Day for D5p2 {
             .iter()
             .map(|v| {
                 match self.correct_vector(v) {
-                    Some(corrected) => corrected.get((corrected.len() - 1)/2).unwrap().clone(),
+                    Some(corrected) => *corrected.get((corrected.len() - 1)/2).unwrap(),
                     None => 0
                 }
             })
