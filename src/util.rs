@@ -5,7 +5,7 @@ pub struct TwoDWindowIterator<'a, T> {
     window_size: (usize, usize),
     current_row: usize,
     current_col: usize,
-    total_windows: usize
+    total_windows: usize,
 }
 
 impl<'a, T> TwoDWindowIterator<'a, T> {
@@ -45,7 +45,7 @@ impl<'a, T: Clone + Copy> Iterator for TwoDWindowIterator<'a, T> {
         let rows = self.matrix.len();
 
         if rows == 0 || self.matrix[0].is_empty() {
-            return None; 
+            return None;
         }
 
         let cols = self.matrix[0].len();
@@ -74,31 +74,25 @@ impl<'a, T: Clone + Copy> Iterator for TwoDWindowIterator<'a, T> {
 
         Some(window)
     }
-    
 }
 
 pub fn matrix_transpose<T: Clone>(matrix: &[Vec<T>]) -> Vec<Vec<T>> {
-    
     let mut t_matrix = vec![vec![]; matrix[0].len()];
-    
-    matrix
-        .iter()
-        .for_each(|row| {
-            row
-                .iter()
-                .enumerate()
-                .for_each(|(ind, value)| {
-                    t_matrix[ind].push(value.clone());
-                });
+
+    matrix.iter().for_each(|row| {
+        row.iter().enumerate().for_each(|(ind, value)| {
+            t_matrix[ind].push(value.clone());
         });
+    });
     t_matrix
 }
-pub fn matrix_count_row_match<T: Clone + std::cmp::PartialEq>(matrix: &[Vec<T>], pattern: &[T]) -> usize {
+pub fn matrix_count_row_match<T: Clone + std::cmp::PartialEq>(
+    matrix: &[Vec<T>],
+    pattern: &[T],
+) -> usize {
     matrix
         .iter()
-        .filter(|group| {
-            group.starts_with(pattern)
-        })
+        .filter(|group| group.starts_with(pattern))
         .count()
 }
 
@@ -108,16 +102,13 @@ pub fn has_common_element<T: PartialEq>(vec_a: &[T], vec_b: &[T]) -> bool {
 
 pub fn find_first_common_index<T: PartialEq>(vec_a: &[T], vec_b: &[T]) -> Option<(usize, usize)> {
     match vec_a
-        .iter() 
+        .iter()
         .enumerate()
-        .try_for_each(|(i, a)| {
-            match vec_b.iter().position(|b| b == a) {
-                Some(j) => ControlFlow::Break((i, j)),
-                None => ControlFlow::Continue(()) 
-            }
-        })
-    {
+        .try_for_each(|(i, a)| match vec_b.iter().position(|b| b == a) {
+            Some(j) => ControlFlow::Break((i, j)),
+            None => ControlFlow::Continue(()),
+        }) {
         ControlFlow::Break((i, j)) => Some((i, j)),
-        ControlFlow::Continue(()) => None
+        ControlFlow::Continue(()) => None,
     }
 }

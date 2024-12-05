@@ -9,5 +9,5 @@ pub mod days {
 }
 
 pub use day::Day;
-pub use util::*;
 pub use days::*;
+pub use util::*;

@@ -1,7 +1,7 @@
-use std::time::Instant;
 use aoc24::*;
+use std::time::Instant;
 
-fn main() -> std::io::Result<()>{
+fn main() -> std::io::Result<()> {
     let now = Instant::now();
 
     // specify which day to solve
