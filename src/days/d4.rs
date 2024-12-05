@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{BufReader, BufRead};
 
 use crate::day::Day;
-use crate::util::{two_d_window, matrix_transpose, matrix_count_row_match};
+use crate::util::{TwoDWindowIterator, matrix_transpose, matrix_count_row_match};
 
 #[derive(Default)]
 
@@ -25,16 +25,17 @@ impl Day for D4p1 {
 
     fn solve(&mut self) -> std::io::Result<()>{
         
-        let windows = two_d_window(&self.matrix, (4, 4));
+        let windows = TwoDWindowIterator::new(&self.matrix, (4, 4));
+        let tot_windows_len = windows.len();
+
         let dim_y = self.matrix.len();
         let dim_x = self.matrix[0].len();
 
         self.result = windows
-            .iter()
             .enumerate()
             .map(|(i, window)| {
                 let is_x_edge = (i + 1) % (dim_x - 4 + 1) == 0;
-                let is_y_edge = i > (windows.len() - (dim_y - 4 - 1));
+                let is_y_edge = i > (tot_windows_len - (dim_y - 4 - 1));
 
                 let mut matches = 0;
                 let pattern = vec!['X', 'M', 'A', 'S'];
@@ -111,9 +112,9 @@ impl Day for D4p2 {
 
     fn solve(&mut self) -> std::io::Result<()>{
         
-        let windows = two_d_window(&self.matrix, (3, 3));
+        let windows = TwoDWindowIterator::new(&self.matrix, (3, 3));
+
         self.result = windows
-            .iter()
             .map(|window| {
                 let mut matches = 0;
                 let pattern = vec!['M', 'A', 'S'];
