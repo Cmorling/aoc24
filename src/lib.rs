@@ -5,7 +5,8 @@ pub mod days {
     automod::dir!(pub "src/days/");
     aoc_macros::pub_use_solutions!("src/days/");
     // the one under this is for LSP services
-    pub use self::d5::*;
+    pub use self::d6::*;
+    pub use self::d7::*;
 }
 
 pub use day::Day;
