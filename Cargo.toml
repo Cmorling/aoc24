@@ -8,3 +8,4 @@ automod = "1.0"
 itertools = "0.13.0"
 regex = "1.11.1"
 aoc_macros = { path = "./aoc_macros" }
+glam = "0.29.2"
