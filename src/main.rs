@@ -1,6 +1,7 @@
 use aoc24::*;
+
 use clap::Parser;
-use std::time::Instant;
+use criterion::Criterion;
 
 /// Solver for Advent of code 2024 written in rust (author cBang) 
 ///
@@ -9,12 +10,37 @@ use std::time::Instant;
 
 struct Args {
     /// Day to solve
-    #[arg(short, long)]
+    #[arg(short)]
     day: u32,
 
     /// Part to solve
-    #[arg(short, long)]
+    #[arg(short)]
     part: u32,
+    
+    /// Benchmark solution with criterion
+    #[arg(short)]
+    benchmark: bool,
+
+
+}
+
+fn do_solving(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()>{
+    d.parse_input(&format!("src/input/day{}.txt", day))?;
+
+    match part {
+        1 => d.solve_part_one(),
+        2 => d.solve_part_two(),
+        _ => Ok(println!("Invalid part see cargo -h")),
+    }?;
+    Ok(())
+}
+
+fn bench_mark_wrapper(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()>{
+    let mut criterion = Criterion::default();
+    criterion.bench_function(&format!("Day {} part {}", day, part), |b| b.iter(|| {
+        do_solving(d, day, part)
+    }));   
+    Ok(())
 }
 
 fn main() -> std::io::Result<()> {
@@ -26,19 +52,13 @@ fn main() -> std::io::Result<()> {
 
     aoc_macros::init_day!("d", "src/days/", "day");
 
-    let now = Instant::now();
-    d.parse_input(&format!("src/input/day{}.txt", day))?;
-
-    match args.part {
-        1 => d.solve_part_one(),
-        2 => d.solve_part_two(),
-        _ => Ok(println!("Invalid part see cargo -h")),
-    }?;
-
+    match args.benchmark {
+        true => bench_mark_wrapper(&mut d, &day, &args.part)?,
+        false => do_solving(&mut d, &day, &args.part)?,
+    }; 
+    
     let sol = d.get_solution();
     println!("Solution for Day {} Part {}: {}", args.day, args.part, sol);
 
-    let done = Instant::now();
-    println!("Executed in {:?}", done.duration_since(now));
     Ok(())
 }

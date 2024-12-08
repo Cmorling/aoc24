@@ -5,17 +5,17 @@ This is a repository containing solutions for advent of code 2024. <br>
 The project is mainly for me to learn the rust programming language, so excuse the sh*tty code.<br>
 
 ## Usage
-```sh
+```
 Solver for Advent of code 2024 written in rust (author cBang)
 
-Usage: aoc24 --day <DAY> --part <PART>
+Usage: aoc24 [OPTIONS] -d <DAY> -p <PART>
 
 Options:
-  -d, --day <DAY>    Day to solve
-  -p, --part <PART>  Part to solve
-  -h, --help         Print help
-  -V, --version      Print version
-
+  -d <DAY>       Day to solve
+  -p <PART>      Part to solve
+  -b             Benchmark solution with criterion
+  -h, --help     Print help
+  -V, --version  Print version
 ```
 
 ## Building

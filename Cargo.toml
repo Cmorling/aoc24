@@ -10,3 +10,4 @@ regex = "1.11.1"
 aoc_macros = { path = "./aoc_macros" }
 glam = "0.29.2"
 clap = { version = "4.5.23", features = ["derive"] }
+criterion = "0.5.1"
