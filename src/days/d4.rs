@@ -6,12 +6,12 @@ use crate::util::{TwoDWindowIterator, matrix_transpose, matrix_count_row_match};
 
 #[derive(Default)]
 
-pub struct D4p1 {
+pub struct D4 {
     matrix: Vec<Vec<char>>,
     result: i32,
 }
 
-impl Day for D4p1 {
+impl Day for D4 {
     fn parse_input(&mut self, path: &str) -> std::io::Result<()> {
         let file = File::open(path)?;
         let reader = BufReader::new(file);
@@ -23,7 +23,7 @@ impl Day for D4p1 {
         Ok(())
     }
 
-    fn solve(&mut self) -> std::io::Result<()>{
+    fn solve_part_one(&mut self) -> std::io::Result<()>{
         
         let windows = TwoDWindowIterator::new(&self.matrix, (4, 4));
         let tot_windows_len = windows.len();
@@ -86,32 +86,7 @@ impl Day for D4p1 {
         Ok(())
     }
 
-    fn get_solution(&self) -> String {
-        self.result.to_string()
-    }
-}
-
-#[derive(Default)]
-
-pub struct D4p2 {
-    matrix: Vec<Vec<char>>,
-    result: i32,
-}
-
-impl Day for D4p2 {
-    fn parse_input(&mut self, path: &str) -> std::io::Result<()> {
-        let file = File::open(path)?;
-        let reader = BufReader::new(file);
-        self.matrix = reader
-            .lines()
-            .map(|l| l.unwrap().chars().collect())
-            .collect();
-
-        Ok(())
-    }
-
-    fn solve(&mut self) -> std::io::Result<()>{
-        
+    fn solve_part_two(&mut self) -> std::io::Result<()>{
         let windows = TwoDWindowIterator::new(&self.matrix, (3, 3));
 
         self.result = windows
@@ -149,9 +124,8 @@ impl Day for D4p2 {
         Ok(())
     }
 
+
     fn get_solution(&self) -> String {
         self.result.to_string()
     }
 }
-
-

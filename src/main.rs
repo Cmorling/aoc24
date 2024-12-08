@@ -1,21 +1,44 @@
 use aoc24::*;
+use clap::Parser;
 use std::time::Instant;
 
+/// Solver for Advent of code 2024 written in rust (author cBang) 
+///
+#[derive(Parser, Debug)]
+#[command(version, about, long_about = None)]
+
+struct Args {
+    /// Day to solve
+    #[arg(short, long)]
+    day: u32,
+
+    /// Part to solve
+    #[arg(short, long)]
+    part: u32,
+}
+
 fn main() -> std::io::Result<()> {
+    let args = Args::parse();
+
+
+    let day = args.day;
+    let mut d;
+
+    aoc_macros::init_day!("d", "src/days/", "day");
+
     let now = Instant::now();
+    d.parse_input(&format!("src/input/day{}.txt", day))?;
 
-    // specify which day to solve
-    let mut d = D7p2::new();
-
-    d.parse_input("src/input/day7.txt")?;
-    let a_fop = Instant::now();
-    d.solve()?;
+    match args.part {
+        1 => d.solve_part_one(),
+        2 => d.solve_part_two(),
+        _ => Ok(println!("Invalid part see cargo -h")),
+    }?;
 
     let sol = d.get_solution();
-    println!("{}", sol);
+    println!("Solution for Day {} Part {}: {}", args.day, args.part, sol);
 
     let done = Instant::now();
     println!("Executed in {:?}", done.duration_since(now));
-    println!("Excluding Input parsing {:?}", a_fop.duration_since(now));
     Ok(())
 }

@@ -6,12 +6,12 @@ use crate::day::Day;
 
 #[derive(Default)]
 
-pub struct D3p1 {
+pub struct D3 {
     inp: String,
     result: i32,
 }
 
-impl Day for D3p1 {
+impl Day for D3 {
     fn parse_input(&mut self, path: &str) -> std::io::Result<()> {
         let file = File::open(path)?;
         let reader = BufReader::new(file);
@@ -23,7 +23,7 @@ impl Day for D3p1 {
         Ok(())
     }
 
-    fn solve(&mut self) -> std::io::Result<()>{
+    fn solve_part_one(&mut self) -> std::io::Result<()>{
         let re = Regex::new(r"mul\((?<n>\d+),(?<m>\d+)\)").unwrap();
 
         self.result = re
@@ -36,32 +36,8 @@ impl Day for D3p1 {
 
         Ok(())
     }
-
-    fn get_solution(&self) -> String {
-        self.result.to_string()
-    }
-}
-
-#[derive(Default)]
-
-pub struct D3p2 {
-    inp: String,
-    result: i32,
-}
-
-impl Day for D3p2 {
-    fn parse_input(&mut self, path: &str) -> std::io::Result<()> {
-        let file = File::open(path)?;
-        let reader = BufReader::new(file);
-        self.inp = reader
-            .lines()
-            .collect::<Result<Vec<String>, _>>()?
-            .join("");
-
-        Ok(())
-    }
     
-    fn solve(&mut self) -> std::io::Result<()>{
+    fn solve_part_two(&mut self) -> std::io::Result<()>{
         let re = Regex::new(r"(?<mul>mul\((?<n>\d+),(?<m>\d+)\))|(?<do>do\(\))|(?<dont>don't\(\))").unwrap();
         let mut is_doing = true;
 
@@ -83,7 +59,9 @@ impl Day for D3p2 {
         Ok(())
     }
 
+
     fn get_solution(&self) -> String {
         self.result.to_string()
     }
 }
+

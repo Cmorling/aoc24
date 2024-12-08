@@ -23,12 +23,12 @@ fn _valid_check(v: Vec<i32>) -> bool {
 
 #[derive(Default)]
 
-pub struct D2p1 {
+pub struct D2 {
     reports: Vec<Vec<i32>>,
     result: i32,
 }
 
-impl Day for D2p1 {
+impl Day for D2 {
     fn parse_input(&mut self, path: &str) -> std::io::Result<()> {
         let file = File::open(path)?;
         let reader = BufReader::new(file);
@@ -45,7 +45,7 @@ impl Day for D2p1 {
         Ok(())
     }
 
-    fn solve(&mut self) ->  std::io::Result<()>{
+    fn solve_part_one(&mut self) ->  std::io::Result<()>{
         self.result = self.reports.iter()
             .filter(|v| {
                 let orig = v.to_vec();
@@ -54,36 +54,7 @@ impl Day for D2p1 {
         Ok(())
     }
 
-    fn get_solution(&self) -> String {
-        self.result.to_string()
-    }
-}
-
-#[derive(Default)]
-
-pub struct D2p2 {
-    reports: Vec<Vec<i32>>,
-    result: i32,
-}
-
-impl Day for D2p2 {
-    fn parse_input(&mut self, path: &str) -> std::io::Result<()> {
-        let file = File::open(path)?;
-        let reader = BufReader::new(file);
-
-        for line in reader.lines() {
-            let line = line?;
-            let v: Vec<i32> = line
-                .split(" ")
-                .map(|s| s.parse::<i32>().unwrap())
-                .collect();
-            self.reports.push(v);
-        }
-
-        Ok(())
-    }
-    
-    fn solve(&mut self) ->  std::io::Result<()>{
+    fn solve_part_two(&mut self) ->  std::io::Result<()>{
         self.result = self.reports
             .iter()
             .filter(|v| {
@@ -104,7 +75,9 @@ impl Day for D2p2 {
         Ok(())
     }
 
+
     fn get_solution(&self) -> String {
         self.result.to_string()
     }
 }
+
