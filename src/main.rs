@@ -3,8 +3,8 @@ use aoc24::*;
 use clap::Parser;
 use criterion::Criterion;
 
-/// Solver for Advent of code 2024 written in rust (author cBang) 
-///
+/// Solver for Advent of code 2024 written in rust (author cBang)
+
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 
@@ -16,15 +16,13 @@ struct Args {
     /// Part to solve
     #[arg(short)]
     part: u32,
-    
+
     /// Benchmark solution with criterion
     #[arg(short)]
     benchmark: bool,
-
-
 }
 
-fn do_solving(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()>{
+fn do_solving(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()> {
     d.parse_input(&format!("src/input/day{}.txt", day))?;
 
     match part {
@@ -35,17 +33,16 @@ fn do_solving(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()>{
     Ok(())
 }
 
-fn bench_mark_wrapper(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()>{
+fn bench_mark_wrapper(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()> {
     let mut criterion = Criterion::default();
-    criterion.bench_function(&format!("Day {} part {}", day, part), |b| b.iter(|| {
-        do_solving(d, day, part)
-    }));   
+    criterion.bench_function(&format!("Day {} part {}", day, part), |b| {
+        b.iter(|| do_solving(d, day, part))
+    });
     Ok(())
 }
 
 fn main() -> std::io::Result<()> {
     let args = Args::parse();
-
 
     let day = args.day;
     let mut d;
@@ -55,8 +52,8 @@ fn main() -> std::io::Result<()> {
     match args.benchmark {
         true => bench_mark_wrapper(&mut d, &day, &args.part)?,
         false => do_solving(&mut d, &day, &args.part)?,
-    }; 
-    
+    };
+
     let sol = d.get_solution();
     println!("Solution for Day {} Part {}: {}", args.day, args.part, sol);
 
