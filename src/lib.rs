@@ -14,6 +14,7 @@ pub mod days {
     pub use self::d6::*;
     pub use self::d7::*;
     pub use self::d8::*;
+    pub use self::d9::*;
 }
 
 #[derive(DayEnum)]
@@ -27,6 +28,7 @@ pub enum DayEnum {
     D6(days::D6),
     D7(days::D7),
     D8(days::D8),
+    D9(days::D9),
 }
 
 pub use day::Day;
