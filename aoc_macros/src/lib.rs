@@ -64,13 +64,10 @@ pub fn init_day(input: TokenStream) -> TokenStream {
     let single_digits: Vec<u32> = imports_s
         .iter()
         .map(|s| {
-            s
-                .chars()
-                .find(|c| c.is_numeric())
-                .map(|c| c.to_digit(10).expect("Not a valid digit"))
-                .expect("No numeric character found")
+            s[1..].parse::<u32>().expect("Not a valid digit")
         })
         .collect();
+
     let ident_imports: Vec<Ident> = imports_s
         .iter()
         .map(|s| Ident::new(s, Span::call_site()))
