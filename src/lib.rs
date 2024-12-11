@@ -8,6 +8,7 @@ pub mod days {
     // Have to type these out for linting services
     pub use self::d1::*;
     pub use self::d10::*;
+    pub use self::d11::*;
     pub use self::d2::*;
     pub use self::d3::*;
     pub use self::d4::*;
@@ -31,6 +32,7 @@ pub enum DayEnum {
     D8(days::D8),
     D9(days::D9),
     D10(days::D10),
+    D11(days::D11),
 }
 
 pub use day::Day;
