@@ -37,7 +37,7 @@ impl<'a, T> TwoDWindowIterator<'a, T> {
     }
 }
 
-impl<'a, T: Clone + Copy> Iterator for TwoDWindowIterator<'a, T> {
+impl<T: Clone + Copy> Iterator for TwoDWindowIterator<'_, T> {
     type Item = Vec<Vec<T>>;
 
     fn next(&mut self) -> Option<Self::Item> {
