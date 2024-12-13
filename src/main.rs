@@ -1,3 +1,5 @@
+use std::io::{Error, ErrorKind};
+
 use aoc24::*;
 
 use clap::Parser;
@@ -7,7 +9,6 @@ use criterion::Criterion;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
-
 struct Args {
     /// Day to solve
     #[arg(short)]
@@ -28,7 +29,7 @@ fn do_solving(d: &mut DayEnum, day: &u32, part: &u32) -> std::io::Result<()> {
     match part {
         1 => d.solve_part_one(),
         2 => d.solve_part_two(),
-        _ => Ok(println!("Invalid part see cargo -h")),
+        _ => Err(Error::new(ErrorKind::InvalidInput, "Expected -d [1 2]")),
     }?;
     Ok(())
 }
