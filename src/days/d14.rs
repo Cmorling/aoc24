@@ -108,10 +108,9 @@ impl Day for D14 {
     }
 
     fn solve_part_one(&mut self) -> std::io::Result<()>{
-        print!("Parsed: {:?}", self.robots);
         let final_positions = D14::step(self.robots.clone(), STEPS);
 
-        let mut quadrants = vec![0; 4];
+        let mut quadrants = [0; 4];
         let mid_x = (X-1) / 2;
         let mid_y = (Y-1) / 2;
 
@@ -131,7 +130,6 @@ impl Day for D14 {
 
             quadrants[insert_pos] += 1;
         }
-        print!("Quadrants: {:?}", quadrants);
         self.result = quadrants
             .iter()
             .product::<u32>();

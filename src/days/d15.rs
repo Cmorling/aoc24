@@ -30,57 +30,57 @@ pub struct D15 {
 }
 
 impl D15 {
-    fn display(&self) {
-        for y in 0..(self.dimensions.y) {
-            for x in 0..(self.dimensions.x) {
-                let pos = IVec2::new(x,y);
-
-                if pos == self.robot {
-                    print!("@");
-                    continue;
-                }
-
-                if let Some(c) = self.grid.get(&pos) {
-                    if c.obstacle {
-                        print!("O");
-                    } else if c.wall {
-
-                        print!("#");
-                    } else {
-                        print!(".");
-                    }
-                }             
-            }
-            println!();
-        }
-    }
-
-    fn display2(&self) {
-        for y in 0..(self.dimensions.y) {
-            for x in 0..(self.dimensions.x * 2) {
-                let pos = IVec2::new(x,y);
-
-                if pos == self.robot {
-                    print!("@");
-                    continue;
-                }
-
-                if let Some(c) = self.grid2.get(&pos) {
-                    if c.obstacle == 1 {
-                        print!("[");
-                    } else if c.obstacle == 2 {
-                        print!("]");
-                    } else if c.wall {
-                        print!("#");
-                    } else {
-                        print!(".");
-                    }
-                }             
-            }
-            println!();
-        }
-    }
-
+    // fn display(&self) {
+    //     for y in 0..(self.dimensions.y) {
+    //         for x in 0..(self.dimensions.x) {
+    //             let pos = IVec2::new(x,y);
+    //
+    //             if pos == self.robot {
+    //                 print!("@");
+    //                 continue;
+    //             }
+    //
+    //             if let Some(c) = self.grid.get(&pos) {
+    //                 if c.obstacle {
+    //                     print!("O");
+    //                 } else if c.wall {
+    //
+    //                     print!("#");
+    //                 } else {
+    //                     print!(".");
+    //                 }
+    //             }             
+    //         }
+    //         println!();
+    //     }
+    // }
+    //
+    // fn display2(&self) {
+    //     for y in 0..(self.dimensions.y) {
+    //         for x in 0..(self.dimensions.x * 2) {
+    //             let pos = IVec2::new(x,y);
+    //
+    //             if pos == self.robot {
+    //                 print!("@");
+    //                 continue;
+    //             }
+    //
+    //             if let Some(c) = self.grid2.get(&pos) {
+    //                 if c.obstacle == 1 {
+    //                     print!("[");
+    //                 } else if c.obstacle == 2 {
+    //                     print!("]");
+    //                 } else if c.wall {
+    //                     print!("#");
+    //                 } else {
+    //                     print!(".");
+    //                 }
+    //             }             
+    //         }
+    //         println!();
+    //     }
+    // }
+    //
     fn move_obstacle (&mut self, pos: &IVec2, direction: &IVec2) -> bool {
         let next_sq = pos + direction;
         let cell = self.grid.get_mut(&next_sq).expect("Outside grid");
