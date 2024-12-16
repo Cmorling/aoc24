@@ -89,7 +89,7 @@ impl D16 {
                     }
 
                     if let Some(cached_cost) = cache.get(&(check_pos, *d)) {
-                        if *cached_cost < cost {
+                        if *cached_cost <= cost {
                             continue;
                         }
                     }
