@@ -12,6 +12,7 @@ pub mod days {
     pub use self::d12::*;
     pub use self::d13::*;
     pub use self::d14::*;
+    pub use self::d15::*;
     pub use self::d2::*;
     pub use self::d3::*;
     pub use self::d4::*;
@@ -39,6 +40,7 @@ pub enum DayEnum {
     D12(days::D12),
     D13(days::D13),
     D14(days::D14),
+    D15(days::D15),
 }
 
 pub use day::Day;
